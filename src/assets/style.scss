@@ -7,6 +7,19 @@
   }
 }
 
-body{
-    margin: 0px;
+body {
+  margin: 0px;
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+  --grey0: #808080;
+  --gray1: #e5e5e5; /* Define the variable */
+  --gray2: #000000b2;
+  --gray3: #000000b2;
+  --gray4:#666;
+
+  --blue0: #eaf0ff;
+
+  --black0: #333;
 }
