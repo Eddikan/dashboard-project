@@ -1,9 +1,15 @@
 <template>
-  <div>home</div>
+  <div></div>
 </template>
 
 <script>
-export default {};
+export default {
+
+  mounted() {
+    // Redirect to the Reports page when the component is mounted
+    this.$router.push({ name: 'Reports' });
+  },
+};
 </script>
 
 <style scoped></style>
