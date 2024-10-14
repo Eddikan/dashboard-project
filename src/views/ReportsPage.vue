@@ -1,133 +1,145 @@
+/* eslint-disable vue/no-unused-components */
 <template>
-  <div class="reports-page">
-    <!-- Top Filters (Timeframe, People, Topic) -->
+  <!-- eslint-disable-next-line vue/no-unused-components -->
+  <div class="reports">
+    <header class="header">
+      <h1>Reports</h1>
+      <div>download</div>
+    </header>
     <div class="filters">
-      <select v-model="selectedTimeframe">
-        <option>Last 7 Days</option>
-        <option>This Month</option>
-        <option>This Year</option>
-        <option>Custom</option>
-      </select>
-      <select v-model="selectedPeople">
-        <option>All</option>
-        <option>Group A</option>
-        <option>Group B</option>
-      </select>
-      <select v-model="selectedTopic">
-        <option>All</option>
-        <option>Topic A</option>
-      </select>
+      <Dropdown :options="timeframes" v-model="selectedTimeframe" />
+      <Dropdown :options="peopleOptions" v-model="selectedPeople" />
+      <Dropdown :options="topicOptions" v-model="selectedTopic" />
     </div>
+    <div class="together">
+      <section class="summary">
+        <StatCard title="Active Users" :value="activeUsers" />
+        <StatCard title="Questions Answered" :value="questionsAnswered" />
+        <StatCard title="Av. Session Length" :value="sessionLength" />
+        <StatCard
+          title="Starting Knowledge"
+          :value="startingKnowledge"
+          :chartData="knowledgeChartData"
+        />
+        <StatCard
+          title="Current Knowledge"
+          :value="currentKnowledge"
+          :chartData="knowledgeChartData"
+        />
+        <StatCard
+          title="Knowledge Gain"
+          :value="knowledgeGain"
+          :chartData="knowledgeChartData"
+        />
+      </section>
 
-    <!-- Summary Stats -->
-    <div class="stats-grid">
-      <div class="stat-card">Active Users: {{ reports.activeUsers }}</div>
-      <div class="stat-card">Questions Answered: {{ reports.questionsAnswered }}</div>
-      <div class="stat-card">Avg Session Length: {{ reports.avgSessionLength }}</div>
-      <div class="stat-card">Starting Knowledge: {{ reports.startingKnowledge }}%</div>
-      <div class="stat-card">Current Knowledge: {{ reports.currentKnowledge }}%</div>
-      <div class="stat-card">Knowledge Gain: {{ reports.knowledgeGain }}%</div>
+      <section class="charts">
+        <ActivityChart :data="activityData" />
+      </section>
     </div>
+<!-- 
+    <section class="topics">
+      <WeakestTopics :topics="weakestTopics" />
+      <StrongestTopics :topics="strongestTopics" />
+    </section>
 
-    <!-- Charts and Topics Section -->
-    <div class="topics-charts">
-      <div class="chart-section">
-        <h3>Activity</h3>
-        <!-- Use vue-chartjs here -->
-        <line-chart :data="chartData" />
-      </div>
-
-      <div class="topics-section">
-        <div class="weakest-topics">
-          <h3>Weakest Topics</h3>
-          <ul>
-            <li v-for="topic in reports.weakestTopics" :key="topic">{{ topic }}</li>
-          </ul>
-        </div>
-        <div class="strongest-topics">
-          <h3>Strongest Topics</h3>
-          <ul>
-            <li v-for="topic in reports.strongestTopics" :key="topic">{{ topic }}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <section class="leaderboards">
+      <UserLeaderboard :users="userLeaderboard" />
+      <GroupsLeaderboard :groups="groupsLeaderboard" />
+    </section> -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import LineChart from '../components/LineChart.vue'; // Your chart component
+import Dropdown from "@/components/Dropdown.vue";
+import StatCard from "@/components/StatCard.vue";
+import ActivityChart from "@/components/ActivityChart.vue";
+import WeakestTopics from "@/components/WeakestTopics.vue";
+import StrongestTopics from "@/components/StrongestTopics.vue";
+import UserLeaderboard from "@/components/UserLeaderboard.vue";
+import GroupsLeaderboard from "@/components/GroupsLeaderboard.vue";
 
 export default {
   components: {
-    LineChart,
+    Dropdown,
+    StatCard,
+    ActivityChart,
+    WeakestTopics,
+    StrongestTopics,
+    UserLeaderboard,
+    GroupsLeaderboard,
   },
   data() {
     return {
-      selectedTimeframe: 'This Month',
-      selectedPeople: 'All',
-      selectedTopic: 'All',
-      chartData: {
-        // Your chart data setup for chart.js
-      },
+      timeframes: ["All-time", "Past Month", "Past Week"],
+      peopleOptions: ["All", "Users", "Admins"],
+      topicOptions: ["All", "Topic 1", "Topic 2"],
+      selectedTimeframe: "All-time",
+      selectedPeople: "All",
+      selectedTopic: "All",
+
+      // Sample Data
+      activeUsers: "27/80",
+      questionsAnswered: 3298,
+      sessionLength: "2m 34s",
+      startingKnowledge: "64%",
+      currentKnowledge: "86%",
+      knowledgeGain: "+34%",
+      knowledgeChartData: {}, // Data for knowledge charts
+      activityData: {}, // Data for activity chart
+
+      weakestTopics: [
+        { name: "Food Safety", correct: 74 },
+        { name: "Compliance Basics", correct: 52 },
+        { name: "Company Networking", correct: 36 },
+      ],
+      strongestTopics: [
+        { name: "Covid Protocols", correct: 95 },
+        { name: "Cyber Security Basics", correct: 92 },
+        { name: "Social Media Policies", correct: 89 },
+      ],
+      userLeaderboard: [
+        { name: "Jesse Thomas", points: 637, correct: 98 },
+        { name: "Thisal Mathiyazhagan", points: 637, correct: 89 },
+      ],
+      groupsLeaderboard: [
+        { name: "Houston Facility", pointsPerUser: 52, correct: 97 },
+        { name: "Test Group", pointsPerUser: 52, correct: 95 },
+      ],
     };
-  },
-  computed: {
-    ...mapGetters(['getReports']),
-    reports() {
-      return this.getReports;
-    },
   },
 };
 </script>
 
-<style scoped>
-.reports-page {
+<style lang="scss">
+.reports {
   padding: 20px;
-}
 
-.filters {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
+  .filters {
+    display: flex;
+    gap: 10px;
+  }
+  .together {
+   
+  }
 
-.stat-card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+  .summary,
+  .charts,
+  .topics,
+  .leaderboards {
+    margin-top: 20px;
+  }
 
-.topics-charts {
-  display: flex;
-  justify-content: space-between;
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
 }
-
-.chart-section {
-  width: 60%;
-}
-
-.topics-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 35%;
-}
-
-.weakest-topics, .strongest-topics {
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
 </style>
