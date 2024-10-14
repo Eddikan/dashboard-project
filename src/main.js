@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import './assets/style.scss';
+import 'typeface-inter';
 import App from './App.vue'
 import router from './router'; // Import the router
 import store from './store'; // Import the Vuex store

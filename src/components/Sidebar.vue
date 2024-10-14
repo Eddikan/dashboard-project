@@ -66,20 +66,20 @@ export default {
 <style scoped lang="scss">
 .sidebar {
   width: 250px;
-  background-color: #fff;
+  background-color: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 24px;
-  overflow:hidden;
+  padding: 0px 24px 0px 24px;
+  overflow: hidden;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-
 
   .logo img {
     width: 127px;
     height: 15px;
     margin-bottom: 40px;
     margin-left: 11px;
+    margin-top: 24px;
   }
 
   .menu {
@@ -93,17 +93,18 @@ export default {
       align-items: center;
       padding: 10px;
       text-decoration: none;
-      color: #333;
+      color: var(--gray3);
       border-radius: 8px;
-
+      font-weight: 500;
+      font-size: 14px;
       i {
         margin-right: 10px;
       }
 
       &:hover,
       &.active {
-        background-color: #eaf0ff;
-        color: #333;
+        background-color: var(--blue0);
+        color: var(--black);
       }
 
       span {
@@ -117,14 +118,22 @@ export default {
     p {
       margin-bottom: 10px;
       font-weight: bold;
-      color: #666;
+      color: var(--gray4);
     }
   }
 
   .profile {
-    display: flex;
     align-items: center;
-
+    margin-top: auto;
+    margin-bottom: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--gray1);
+    img {
+      margin-bottom: 9px;
+    }
+    p {
+      margin: 0px;
+    }
     .profile-avatar {
       width: 40px;
       height: 40px;
@@ -134,11 +143,19 @@ export default {
 
     .profile-info {
       .profile-name {
-        font-weight: bold;
+        font-weight: 600;
+        font-family: Inter;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: left;
       }
       .profile-email {
-        color: #666;
+        color: var(--gray0);
+        //styleName: Body 2;
         font-size: 12px;
+        font-weight: 400;
+        line-height: 14.52px;
+        text-align: left;
       }
     }
   }
