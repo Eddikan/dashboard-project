@@ -25,5 +25,7 @@ export default {
   display: flex;
   gap: 20px;
   background: #F9F9F9;
+  max-height: 100vh;
+  overflow: hidden;
 }
 </style>

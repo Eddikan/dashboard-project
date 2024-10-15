@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
+import weakestImage1 from "@/assets/topics/weakestImage1.svg";
+import weakestImage2 from "@/assets/topics/weakestImage2.svg";
+import weakestImage3 from "@/assets/topics/weakestImage3.svg";
 Vue.use(Vuex); // Register Vuex with Vue
 
 export default new Vuex.Store({
@@ -31,6 +33,26 @@ export default new Vuex.Store({
     timeFrames: ["All-time", "Past Month", "Past Week"],
     peopleOptions: ["All", "Users", "Admins"],
     topicOptions: ["All", "Topic 1", "Topic 2"],
+
+    weakestTopics: [
+      {
+        image: weakestImage1,
+        name: "Food Safety",
+        correct: 74,
+      },
+      {
+        image: weakestImage2,
+
+        name: "Compliance Basics",
+        correct: 52,
+      },
+      {
+        image: weakestImage3,
+
+        name: "Company Networking",
+        correct: 36,
+      },
+    ],
   },
   getters: {
     getReports(state) {
@@ -53,6 +75,9 @@ export default new Vuex.Store({
     },
     getTopicOptions(state) {
       return state.topicOptions;
+    },
+    getWeakestTopics(state) {
+      return state.weakestTopics;
     },
   },
 });

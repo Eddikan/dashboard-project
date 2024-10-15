@@ -48,8 +48,7 @@
       </section>
 
       <section class="charts">
-        activity
-        <!-- <ActivityChart :data="activityData" /> -->
+        <ActivityChart :data="activityData" />
       </section>
     </div>
 
@@ -58,7 +57,7 @@
       <StrongestTopics :topics="strongestTopics" />
     </section>
 
-    <section class="leaderboards">
+    <section class="together">
       <UserLeaderboard :users="userLeaderboard" />
       <GroupsLeaderboard :groups="groupsLeaderboard" />
     </section>
@@ -73,6 +72,7 @@ import WeakestTopics from "@/components/WeakestTopics.vue";
 import StrongestTopics from "@/components/StrongestTopics.vue";
 import UserLeaderboard from "@/components/UserLeaderboard.vue";
 import GroupsLeaderboard from "@/components/GroupsLeaderboard.vue";
+
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -88,11 +88,6 @@ export default {
     return {
       activityData: {}, // Data for activity chart
 
-      weakestTopics: [
-        { name: "Food Safety", correct: 74 },
-        { name: "Compliance Basics", correct: 52 },
-        { name: "Company Networking", correct: 36 },
-      ],
       strongestTopics: [
         { name: "Covid Protocols", correct: 95 },
         { name: "Cyber Security Basics", correct: 92 },
@@ -117,6 +112,7 @@ export default {
       "getTimeFrames",
       "getPeopleOptions",
       "getTopicOptions",
+      "getWeakestTopics",
     ]),
     reports() {
       return this.getReports;
@@ -139,6 +135,9 @@ export default {
     topicOptions() {
       return this.getTopicOptions;
     },
+    weakestTopics() {
+      return this.getWeakestTopics;
+    },
   },
 };
 </script>
@@ -146,7 +145,9 @@ export default {
 <style lang="scss">
 .reports {
   padding: 20px;
-  width:100%;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
 
   .header {
     display: flex;
@@ -175,10 +176,10 @@ export default {
     gap: 10px;
   }
   .together {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 22px;
-    margin-top:15px;
-    background:red
+    margin-top: 15px;
   }
 
   .summary,
