@@ -4,41 +4,56 @@
   <div class="reports">
     <header class="header">
       <h1>Reports</h1>
-      <div>download</div>
+      <div class="downloadCTA">
+        <img src="@/assets/download.svg" alt="Arrow" />
+
+        Download
+      </div>
     </header>
     <div class="filters">
-      <Dropdown :options="timeframes" v-model="selectedTimeframe" />
+      <Dropdown :options="timeFrames" v-model="selectedTimeFrame" />
       <Dropdown :options="peopleOptions" v-model="selectedPeople" />
       <Dropdown :options="topicOptions" v-model="selectedTopic" />
     </div>
     <div class="together">
       <section class="summary">
-        <StatCard title="Active Users" :value="activeUsers" />
-        <StatCard title="Questions Answered" :value="questionsAnswered" />
-        <StatCard title="Av. Session Length" :value="sessionLength" />
+        <StatCard
+          title="Active Users"
+          :value="reports.activeUsers"
+          :total="80"
+        />
+        <StatCard
+          title="Questions Answered"
+          :value="reports.questionsAnswered"
+        />
+        <StatCard
+          title="Av. Session Length"
+          :value="reports.avgSessionLength"
+        />
         <StatCard
           title="Starting Knowledge"
-          :value="startingKnowledge"
-          :chartData="knowledgeChartData"
+          :value="reports.startingKnowledge"
+          :chartData="reports.knowledgeChartData"
         />
         <StatCard
           title="Current Knowledge"
-          :value="currentKnowledge"
-          :chartData="knowledgeChartData"
+          :value="reports.currentKnowledge"
+          :chartData="reports.knowledgeChartData"
         />
         <StatCard
           title="Knowledge Gain"
-          :value="knowledgeGain"
-          :chartData="knowledgeChartData"
+          :value="reports.knowledgeGain"
+          :chartData="reports.knowledgeChartData"
         />
       </section>
 
       <section class="charts">
-        <ActivityChart :data="activityData" />
+        activity
+        <!-- <ActivityChart :data="activityData" /> -->
       </section>
     </div>
-<!-- 
-    <section class="topics">
+
+    <section class="together">
       <WeakestTopics :topics="weakestTopics" />
       <StrongestTopics :topics="strongestTopics" />
     </section>
@@ -46,7 +61,7 @@
     <section class="leaderboards">
       <UserLeaderboard :users="userLeaderboard" />
       <GroupsLeaderboard :groups="groupsLeaderboard" />
-    </section> -->
+    </section>
   </div>
 </template>
 
@@ -58,7 +73,7 @@ import WeakestTopics from "@/components/WeakestTopics.vue";
 import StrongestTopics from "@/components/StrongestTopics.vue";
 import UserLeaderboard from "@/components/UserLeaderboard.vue";
 import GroupsLeaderboard from "@/components/GroupsLeaderboard.vue";
-
+import { mapGetters } from "vuex";
 export default {
   components: {
     Dropdown,
@@ -71,21 +86,6 @@ export default {
   },
   data() {
     return {
-      timeframes: ["All-time", "Past Month", "Past Week"],
-      peopleOptions: ["All", "Users", "Admins"],
-      topicOptions: ["All", "Topic 1", "Topic 2"],
-      selectedTimeframe: "All-time",
-      selectedPeople: "All",
-      selectedTopic: "All",
-
-      // Sample Data
-      activeUsers: "27/80",
-      questionsAnswered: 3298,
-      sessionLength: "2m 34s",
-      startingKnowledge: "64%",
-      currentKnowledge: "86%",
-      knowledgeGain: "+34%",
-      knowledgeChartData: {}, // Data for knowledge charts
       activityData: {}, // Data for activity chart
 
       weakestTopics: [
@@ -108,17 +108,66 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters([
+      "getReports",
+      "getSelectedTimeFrame",
+      "getSelectedPeople",
+      "getSelectedTopic",
+      "getTimeFrames",
+      "getPeopleOptions",
+      "getTopicOptions",
+    ]),
+    reports() {
+      return this.getReports;
+    },
+    selectedTimeFrame() {
+      return this.getSelectedTimeFrame;
+    },
+    selectedPeople() {
+      return this.getSelectedPeople;
+    },
+    selectedTopic() {
+      return this.getSelectedTopic;
+    },
+    timeFrames() {
+      return this.getTimeFrames;
+    },
+    peopleOptions() {
+      return this.getPeopleOptions;
+    },
+    topicOptions() {
+      return this.getTopicOptions;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .reports {
   padding: 20px;
+  width:100%;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--gray7);
+    margin-bottom: 26px;
+    h1 {
+      font-size: 22.17px;
+      font-weight: 700;
+      line-height: 26.83px;
+      text-align: left;
+    }
+    .downloadCTA {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gray6);
+    }
   }
 
   .filters {
@@ -126,7 +175,10 @@ export default {
     gap: 10px;
   }
   .together {
-   
+    display: flex;
+    gap: 22px;
+    margin-top:15px;
+    background:red
   }
 
   .summary,
