@@ -48,7 +48,7 @@
       </section>
 
       <section class="charts">
-        <ActivityChart :data="activityData" />
+        <ActivityChart  />
       </section>
     </div>
 
@@ -86,7 +86,6 @@ export default {
   },
   data() {
     return {
-      activityData: {}, // Data for activity chart
 
       strongestTopics: [
         { name: "Covid Protocols", correct: 95 },
