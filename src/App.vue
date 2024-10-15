@@ -24,5 +24,6 @@ export default {
 .dashboardLayout {
   display: flex;
   gap: 20px;
+  background: #F9F9F9;
 }
 </style>
