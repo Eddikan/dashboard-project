@@ -1,13 +1,21 @@
 <template>
-  <div class="strongest-topics">
+  <div class="weakest-topics">
     <h3>Strongest Topics</h3>
     <ul>
-      <li v-for="topic in topics" :key="topic.name">
-        <div class="topic-name">{{ topic.name }}</div>
-        <div class="progress-bar">
-          <div class="progress" :style="{ width: topic.correct + '%' }"></div>
+      <li v-for="topic in topics" :key="topic.name" class="balance">
+        <img :src="topic.image" alt="Arrow" />
+
+        <div class="content">
+          <div class="topic-name">{{ topic.name }}</div>
+          <div class="progress-bar">
+            <div class="progress" :style="{ width: topic.correct + '%' }"></div>
+          </div>
         </div>
-        <span class="correct">{{ topic.correct }}% Correct</span>
+
+        <span class="percent"
+          >{{ topic.correct }}%
+          <span class="correct"> Correct </span>
+        </span>
       </li>
     </ul>
   </div>
@@ -25,7 +33,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.strongest-topics {
+.weakest-topics {
   background-color: #fff;
   padding: 15px;
   border-radius: 8px;
@@ -43,17 +51,27 @@ export default {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
-
+      .balance{
+        display: flex;
+        align-items: end;
+      }
+      .content {
+        width: 60%;
+        margin: 0 14.62px;
+      }
       .topic-name {
         flex: 1;
+        font-size: 12.93px;
+        font-weight: 600;
+        margin-bottom: 7px;
       }
 
       .progress-bar {
         background-color: #f0f0f0;
         border-radius: 5px;
-        width: 100px;
+        width: 100%;
+
         height: 8px;
-        margin: 0 10px;
 
         .progress {
           height: 100%;
@@ -61,9 +79,13 @@ export default {
           border-radius: 5px;
         }
       }
-
-      .correct {
-        color: #888;
+      .percent {
+        font-size: 12.93px;
+        font-weight: 600;
+        padding-top:15px;
+        .correct {
+          color: #888;
+        }
       }
     }
   }
