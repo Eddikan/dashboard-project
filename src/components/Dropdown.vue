@@ -81,6 +81,7 @@ export default {
     width: 100%;
     border: 1px solid var(--gray5);
     border-radius: 18.47px;
+    z-index:20;
 
     li {
       padding: 10px;

@@ -83,11 +83,7 @@ export default {
   },
   data() {
     return {
-      strongestTopics: [
-        { name: "Covid Protocols", correct: 95 },
-        { name: "Cyber Security Basics", correct: 92 },
-        { name: "Social Media Policies", correct: 89 },
-      ],
+ 
 
       groupsLeaderboard: [
         { name: "Houston Facility", pointsPerUser: 52, correct: 97 },
@@ -105,6 +101,7 @@ export default {
       "getPeopleOptions",
       "getTopicOptions",
       "getWeakestTopics",
+      "getStrongestTopics"
     ]),
     reports() {
       return this.getReports;
@@ -129,6 +126,9 @@ export default {
     },
     weakestTopics() {
       return this.getWeakestTopics;
+    },
+    strongestTopics() {
+      return this.getStrongestTopics;
     },
   },
 };

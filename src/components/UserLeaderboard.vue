@@ -11,14 +11,28 @@
           <img :src="user.avatar" class="avatar" alt="user avatar" />
           <div class="user-info">
             <span class="user-name">{{ user.name }}</span>
-            <span class="user-points">{{ user.points }} Points - {{ user.correctPercentage }}% Correct</span>
+            <span class="user-points"
+              >{{ user.points }} Points - {{ user.correctPercentage }}%
+              Correct</span
+            >
           </div>
         </div>
         <div class="leaderboard-right">
           <span class="rank">{{ index + 1 }}</span>
           <span :class="user.rankChange > 0 ? 'rank-up' : 'rank-down'">
-            <svg v-if="user.rankChange !== 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-              <path :d="user.rankChange > 0 ? 'M7 14l5-5 5 5H7z' : 'M7 10l5 5 5-5H7z'" fill="currentColor"/>
+            <svg
+              v-if="user.rankChange !== 0"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                :d="
+                  user.rankChange > 0 ? 'M7 14l5-5 5 5H7z' : 'M7 10l5 5 5-5H7z'
+                "
+                fill="currentColor"
+              />
             </svg>
           </span>
         </div>
@@ -28,27 +42,28 @@
 </template>
 
 <script>
+import jesse from "@/assets/jesse.svg";
+
 export default {
   data() {
     return {
       users: [
         {
           id: 1,
-          name: 'Jesse Thomas',
-          avatar: 'https://via.placeholder.com/40',
+          name: "Jesse Thomas",
+          avatar: jesse,
           points: 637,
           correctPercentage: 98,
           rankChange: 1,
         },
         {
           id: 2,
-          name: 'Thisal Mathiyazhagan',
-          avatar: 'https://via.placeholder.com/40',
+          name: "Thisal Mathiyazhagan",
+          avatar: jesse,
           points: 637,
           correctPercentage: 89,
           rankChange: -1,
         },
-     
       ],
     };
   },
@@ -60,16 +75,17 @@ export default {
   background-color: white;
   border-radius: 12px;
   padding: 16px;
-  width:-webkit-fill-available;
+  width: -webkit-fill-available;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .leaderboard-title {
-  font-size: 16px;
+  color: var(--grey0);
+  font-size: 12.93px;
   font-weight: 600;
-  margin-bottom: 16px;
-  color: #333;
+  line-height: 16.63px;
+  text-align: left;
 }
 
 .leaderboard-list {
@@ -108,13 +124,19 @@ export default {
 }
 
 .user-name {
+  font-size: 12.93px;
   font-weight: 600;
-  color: #333;
+  line-height: 16.63px;
+  text-align: left;
 }
 
 .user-points {
-  font-size: 14px;
-  color: #777;
+  color: var(--grey0);
+
+  font-size: 11.08px;
+  font-weight: 500;
+  line-height: 13.41px;
+  text-align: left;
 }
 
 .leaderboard-right {
@@ -123,8 +145,8 @@ export default {
 }
 
 .rank {
-  font-size: 20px;
-  margin-right: 8px;
+  font-size: 14.78px;
+  font-weight: 600;
 }
 
 .rank-up {

@@ -2,7 +2,7 @@
   <div class="weakest-topics">
     <h3>Weakest Topics</h3>
     <ul>
-      <li v-for="topic in topics" :key="topic.name">
+      <li v-for="topic in topics" :key="topic.name" class="balance">
         <img :src="topic.image" alt="Arrow" />
 
         <div class="content">
@@ -12,7 +12,10 @@
           </div>
         </div>
 
-        <span class="correct">{{ topic.correct }}% Correct</span>
+        <span class="percent"
+          >{{ topic.correct }}%
+          <span class="correct"> Correct </span>
+        </span>
       </li>
     </ul>
   </div>
@@ -48,12 +51,19 @@ export default {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
+      .balance{
+        display: flex;
+        align-items: end;
+      }
       .content {
         width: 60%;
         margin: 0 14.62px;
       }
       .topic-name {
         flex: 1;
+        font-size: 12.93px;
+        font-weight: 600;
+        margin-bottom: 7px;
       }
 
       .progress-bar {
@@ -69,9 +79,13 @@ export default {
           border-radius: 5px;
         }
       }
-
-      .correct {
-        color: #888;
+      .percent {
+        font-size: 12.93px;
+        font-weight: 600;
+        padding-top:15px;
+        .correct {
+          color: #888;
+        }
       }
     }
   }

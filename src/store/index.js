@@ -3,6 +3,9 @@ import Vuex from "vuex";
 import weakestImage1 from "@/assets/topics/weakestImage1.svg";
 import weakestImage2 from "@/assets/topics/weakestImage2.svg";
 import weakestImage3 from "@/assets/topics/weakestImage3.svg";
+import strongestImage1 from "@/assets/topics/strongestTopic1.svg";
+import strongestImage2 from "@/assets/topics/strongestTopic2.svg";
+import strongestImage3 from "@/assets/topics/strongestTopic3.svg";
 Vue.use(Vuex); // Register Vuex with Vue
 
 export default new Vuex.Store({
@@ -53,6 +56,26 @@ export default new Vuex.Store({
         correct: 36,
       },
     ],
+    strongestTopics: [
+      {
+        image: strongestImage1,
+
+        name: "Covid Protocols",
+        correct: 95,
+      },
+      {
+        image: strongestImage2,
+
+        name: "Cyber Security Basics",
+        correct: 92,
+      },
+      {
+        image: strongestImage3,
+
+        name: "Social Media Policies",
+        correct: 89,
+      },
+    ],
   },
   getters: {
     getReports(state) {
@@ -78,6 +101,9 @@ export default new Vuex.Store({
     },
     getWeakestTopics(state) {
       return state.weakestTopics;
+    },
+    getStrongestTopics(state) {
+      return state.strongestTopics;
     },
   },
 });

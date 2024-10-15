@@ -32,12 +32,16 @@ export default {
 
   .mainContent {
     flex: 1;
+    padding: 20px;
+    overflow-y: auto;
   }
 
   @media (max-width: 768px) {
     flex-direction: column;
 
-  
+    .mainContent {
+      padding: 10px;
+    }
   }
 }
 </style>
