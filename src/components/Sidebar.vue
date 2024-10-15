@@ -72,7 +72,8 @@ export default {
   height: 100vh;
   padding: 0px 24px 0px 24px;
   overflow: hidden;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4.62px 18.47px 0px #0000000D;
+
 
   .logo img {
     width: 127px;

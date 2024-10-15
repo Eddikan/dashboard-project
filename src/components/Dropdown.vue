@@ -2,6 +2,8 @@
   <div class="dropdown">
     <div @click="toggleDropdown" class="dropdown-selected">
       {{ selected || "Select" }}
+
+      <img src="@/assets/dropDownArrow.svg" alt="Arrow" />
     </div>
     <div v-if="open" class="blur" @click="open = false"></div>
     <ul v-if="open" class="dropdown-options">
@@ -46,6 +48,8 @@ export default {
 <style scoped lang="scss">
 .dropdown {
   position: relative;
+  width: 100%;
+ 
   .blur {
     background: transparent !important;
     position: fixed;
@@ -57,9 +61,14 @@ export default {
     height: 100vh;
   }
   .dropdown-selected {
-    background-color: #f5f5f5;
+    background-color: white;
     padding: 10px;
     cursor: pointer;
+    display: flex;
+    
+    justify-content: space-between;
+    border: 1px solid var(--gray5);
+    border-radius: 18.47px;
   }
 
   .dropdown-options {
@@ -69,7 +78,9 @@ export default {
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 200px;
+    width: 100%;
+    border: 1px solid var(--gray5);
+    border-radius: 18.47px;
 
     li {
       padding: 10px;
