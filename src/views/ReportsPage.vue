@@ -1,12 +1,9 @@
-/* eslint-disable vue/no-unused-components */
 <template>
-  <!-- eslint-disable-next-line vue/no-unused-components -->
   <div class="reports">
     <header class="header">
       <h1>Reports</h1>
       <div class="downloadCTA">
         <img src="@/assets/download.svg" alt="Arrow" />
-
         Download
       </div>
     </header>
@@ -48,7 +45,7 @@
       </section>
 
       <section class="charts">
-        <ActivityChart  />
+        <ActivityChart />
       </section>
     </div>
 
@@ -58,7 +55,7 @@
     </section>
 
     <section class="together">
-      <UserLeaderboard :users="userLeaderboard" />
+      <UserLeaderboard />
       <GroupsLeaderboard :groups="groupsLeaderboard" />
     </section>
   </div>
@@ -86,16 +83,12 @@ export default {
   },
   data() {
     return {
-
       strongestTopics: [
         { name: "Covid Protocols", correct: 95 },
         { name: "Cyber Security Basics", correct: 92 },
         { name: "Social Media Policies", correct: 89 },
       ],
-      userLeaderboard: [
-        { name: "Jesse Thomas", points: 637, correct: 98 },
-        { name: "Thisal Mathiyazhagan", points: 637, correct: 89 },
-      ],
+
       groupsLeaderboard: [
         { name: "Houston Facility", pointsPerUser: 52, correct: 97 },
         { name: "Test Group", pointsPerUser: 52, correct: 95 },
@@ -144,9 +137,10 @@ export default {
 <style lang="scss">
 .reports {
   padding: 20px;
-  width: 100%;
+  width: 95%;
   height: 100vh;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .header {
     display: flex;
@@ -167,6 +161,7 @@ export default {
       font-weight: 600;
       font-size: 13px;
       color: var(--gray6);
+      cursor: pointer;
     }
   }
 
@@ -174,6 +169,7 @@ export default {
     display: flex;
     gap: 10px;
   }
+
   .together {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -181,17 +177,45 @@ export default {
     margin-top: 15px;
   }
 
-  .summary,
-  .charts,
-  .topics,
-  .leaderboards {
-    margin-top: 20px;
-  }
-
   .summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+  }
+
+  @media (max-width: 1024px) {
+    .together {
+      grid-template-columns: 1fr;
+    }
+
+    .summary {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      h1 {
+        font-size: 18px;
+      }
+      .downloadCTA {
+        font-size: 12px;
+      }
+    }
+
+    .filters {
+      flex-direction: column;
+    }
+
+    .together {
+      grid-template-columns: 1fr;
+    }
+
+    .summary {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
   }
 }
 </style>

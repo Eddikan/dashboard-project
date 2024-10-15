@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="dashboardLayout">
     <Sidebar />
-    <router-view></router-view>
+    <div class="mainContent">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -20,12 +22,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .dashboardLayout {
   display: flex;
   gap: 20px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   max-height: 100vh;
   overflow: hidden;
+
+  .mainContent {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+  
+  }
 }
 </style>
